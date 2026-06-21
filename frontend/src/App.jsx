@@ -40,7 +40,8 @@ export default function App() {
     if (token && username && role) {
       setUser({ token, username, role });
       setAppMode('staff');
-      setActiveTab('dashboard');
+      const isAdminUser = role && role.toLowerCase() === 'admin';
+      setActiveTab(isAdminUser ? 'dashboard' : 'tables');
     }
 
     // 2. Check Customer
@@ -69,7 +70,8 @@ export default function App() {
   const handleStaffLoginSuccess = (userData) => {
     setUser(userData);
     setAppMode('staff');
-    setActiveTab('dashboard');
+    const isAdminUser = userData.role && userData.role.toLowerCase() === 'admin';
+    setActiveTab(isAdminUser ? 'dashboard' : 'tables');
   };
 
   const handleStaffLogout = () => {
@@ -130,8 +132,14 @@ export default function App() {
       );
     }
 
+    const isAdmin = user && user.role && user.role.toLowerCase() === 'admin';
+
     const renderStaffContent = () => {
-      switch (activeTab) {
+      let tab = activeTab;
+      if (!isAdmin && (tab === 'dashboard' || tab === 'inventory')) {
+        tab = 'tables';
+      }
+      switch (tab) {
         case 'dashboard':
           return <Dashboard role={user.role} setActiveTab={setActiveTab} />;
         case 'menu':
@@ -145,7 +153,7 @@ export default function App() {
         case 'inventory':
           return <Inventory role={user.role} />;
         default:
-          return <Dashboard role={user.role} setActiveTab={setActiveTab} />;
+          return <Tables role={user.role} />;
       }
     };
 
@@ -159,14 +167,16 @@ export default function App() {
 
           <nav style={{ flexGrow: 1 }}>
             <ul className="nav-links">
-              <li>
-                <div
-                  className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('dashboard')}
-                >
-                  <LayoutDashboard className="nav-icon" /> Dashboard
-                </div>
-              </li>
+              {isAdmin && (
+                <li>
+                  <div
+                    className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('dashboard')}
+                  >
+                    <LayoutDashboard className="nav-icon" /> Dashboard
+                  </div>
+                </li>
+              )}
               <li>
                 <div
                   className={`nav-item ${activeTab === 'menu' ? 'active' : ''}`}
@@ -199,14 +209,16 @@ export default function App() {
                   <ClipboardCheck className="nav-icon" /> Order Tickets
                 </div>
               </li>
-              <li>
-                <div
-                  className={`nav-item ${activeTab === 'inventory' ? 'active' : ''}`}
-                  onClick={() => setActiveTab('inventory')}
-                >
-                  <PackageCheck className="nav-icon" /> Raw Stock
-                </div>
-              </li>
+              {isAdmin && (
+                <li>
+                  <div
+                    className={`nav-item ${activeTab === 'inventory' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('inventory')}
+                  >
+                    <PackageCheck className="nav-icon" /> Raw Stock
+                  </div>
+                </li>
+              )}
             </ul>
           </nav>
 
