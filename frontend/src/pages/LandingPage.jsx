@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../../images/rrlogo.png';
 import { BookOpen, Layers, Calendar, ClipboardCheck, PackageCheck, BarChart3, Zap, Sun, Moon } from 'lucide-react';
 
 export default function LandingPage({ onLaunchStaff, onLaunchCustomer, theme, toggleTheme }) {
@@ -7,7 +8,7 @@ export default function LandingPage({ onLaunchStaff, onLaunchCustomer, theme, to
       {/* Navigation Header */}
       <header className="landing-nav">
         <div className="landing-brand">
-          <span className="brand-icon">🍳</span>
+          <span className="brand-icon"><img src={logo} alt="GourmetOS Logo" /></span>
           <h2 className="brand-name">GourmetOS</h2>
         </div>
         <div className="landing-nav-links">

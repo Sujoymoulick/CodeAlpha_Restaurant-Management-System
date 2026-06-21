@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logo from '../../images/rrlogo.png';
 import { apiCall } from '../services/api';
 
 export default function Login({ onLoginSuccess, onBack }) {
@@ -36,7 +37,7 @@ export default function Login({ onLoginSuccess, onBack }) {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <div className="login-logo">🍳</div>
+          <div className="login-logo"><img src={logo} alt="GourmetOS Logo" /></div>
           <h1 className="login-title">GourmetOS</h1>
           <p className="login-subtitle">Restaurant Management Hub</p>
         </div>

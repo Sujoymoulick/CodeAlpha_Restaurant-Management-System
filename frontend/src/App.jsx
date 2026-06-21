@@ -7,6 +7,7 @@ import Tables from './pages/Tables';
 import Reservations from './pages/Reservations';
 import Orders from './pages/Orders';
 import Inventory from './pages/Inventory';
+import logo from '../images/rrlogo.png';
 
 // Customer space imports
 import CustomerAuth from './pages/customer/CustomerAuth';
@@ -161,7 +162,7 @@ export default function App() {
       <div className="app-container">
         <aside className="sidebar">
           <div className="brand" style={{ cursor: 'pointer' }} onClick={handleStaffLogout}>
-            <span className="brand-icon">🍳</span>
+            <span className="brand-icon"><img src={logo} alt="GourmetOS Logo" /></span>
             <h2 className="brand-name">GourmetOS</h2>
           </div>
 
