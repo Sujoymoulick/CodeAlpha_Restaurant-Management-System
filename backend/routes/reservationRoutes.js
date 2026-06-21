@@ -6,12 +6,12 @@ const {
   getReservationById,
   deleteReservation
 } = require('../controllers/reservationController');
-const { protect } = require('../middleware/authMiddleware');
+const { protect, staffProtect } = require('../middleware/authMiddleware');
 const { validateFields } = require('../middleware/validationMiddleware');
 
 const router = express.Router();
 
-router.use(protect); // All reservation routes are private (Staff/Admin)
+router.use(staffProtect); // All reservation routes are private (Staff/Admin)
 
 router.get('/', getReservations);
 

@@ -11,7 +11,7 @@ const {
   getMyOrders,
   getOrderByIdCustomer
 } = require('../controllers/customerController');
-const { protect, customerProtect, eitherProtect } = require('../middleware/authMiddleware');
+const { protect, customerProtect, eitherProtect, staffProtect } = require('../middleware/authMiddleware');
 const { validateFields } = require('../middleware/validationMiddleware');
 
 const router = express.Router();
@@ -20,7 +20,7 @@ const router = express.Router();
 router.get('/my-orders', customerProtect, getMyOrders);
 
 // 2. Orders list (Staff / Admin only)
-router.get('/', protect, getOrders);
+router.get('/', staffProtect, getOrders);
 
 // 3. Get single order / Track status (Either Staff OR Customer)
 router.get(
@@ -61,7 +61,7 @@ router.post(
 // 5. Update order status (Staff / Admin only)
 router.put(
   '/:id',
-  protect,
+  staffProtect,
   [
     param('id').isMongoId().withMessage('Invalid Order ID'),
     body('status')

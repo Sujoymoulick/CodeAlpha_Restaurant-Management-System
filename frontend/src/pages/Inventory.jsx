@@ -20,7 +20,7 @@ export default function Inventory({ role }) {
     lowStockThreshold: ''
   });
 
-  const isAdmin = role === 'admin';
+  const isAdmin = role && role.toLowerCase() === 'admin';
 
   const fetchInventory = async () => {
     setLoading(true);

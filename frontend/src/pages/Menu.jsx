@@ -26,7 +26,7 @@ export default function Menu({ role }) {
     available: true
   });
 
-  const isAdmin = role === 'admin';
+  const isAdmin = role && role.toLowerCase() === 'admin';
 
   const fetchMenu = async () => {
     setLoading(true);

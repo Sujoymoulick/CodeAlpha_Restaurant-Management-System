@@ -5,12 +5,12 @@ const {
   getInventoryItems,
   updateInventoryItem
 } = require('../controllers/inventoryController');
-const { protect, adminOnly } = require('../middleware/authMiddleware');
+const { protect, adminOnly, staffProtect } = require('../middleware/authMiddleware');
 const { validateFields } = require('../middleware/validationMiddleware');
 
 const router = express.Router();
 
-router.use(protect); // All inventory routes require authentication
+router.use(staffProtect); // All inventory routes require staff/admin authorization
 
 router.get('/', getInventoryItems);
 

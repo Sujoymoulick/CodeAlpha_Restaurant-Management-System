@@ -7,7 +7,7 @@ const {
   updateTable,
   deleteTable
 } = require('../controllers/tableController');
-const { protect, adminOnly, eitherProtect } = require('../middleware/authMiddleware');
+const { protect, adminOnly, eitherProtect, staffProtect } = require('../middleware/authMiddleware');
 const { validateFields } = require('../middleware/validationMiddleware');
 
 const router = express.Router();
@@ -16,7 +16,7 @@ const router = express.Router();
 router.get('/', eitherProtect, getTables);
 
 // All subsequent table routes require staff authentication
-router.use(protect);
+router.use(staffProtect);
 
 router.get(
   '/:id',

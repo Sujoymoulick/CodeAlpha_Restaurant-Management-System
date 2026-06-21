@@ -11,7 +11,7 @@ export default function Dashboard({ role, setActiveTab }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const isAdmin = role === 'admin';
+  const isAdmin = role && role.toLowerCase() === 'admin';
 
   useEffect(() => {
     const fetchDashboardData = async () => {

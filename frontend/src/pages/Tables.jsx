@@ -19,7 +19,7 @@ export default function Tables({ role }) {
     status: 'Available'
   });
 
-  const isAdmin = role === 'admin';
+  const isAdmin = role && role.toLowerCase() === 'admin';
 
   const fetchTables = async () => {
     setLoading(true);
